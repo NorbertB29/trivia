@@ -1,3 +1,5 @@
+require('./gameLogger.js');
+
 exports = typeof window !== "undefined" && window !== null ? window : global;
 
 exports.Game = function(logger) {

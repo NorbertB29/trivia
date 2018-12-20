@@ -1,4 +1,5 @@
 require('./game.js');
+require('./gameLogger.js');
 
 // describe("The test environment", function() {
 //   it("should pass", function() {
