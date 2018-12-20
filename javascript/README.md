@@ -7,6 +7,12 @@ Install the jasmine-node plugin from https://github.com/mhevery/jasmine-node
 
 And execute:
 
-	jasmine-node .
+	npm run test .
 
-Any test source matching the pattern *.spec.js will be executed.
+Install the istanbul for test coverage
+
+	npm install istanbul -g
+
+And execute:
+
+	npm run coverage .

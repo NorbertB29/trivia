@@ -1,0 +1,13 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "Test with node.js\r =====================",
+  "main": "game.js",
+  "scripts": {
+    "test": "jasmine-node game.spec.js",
+    "test-watch": "jasmine-node game.spec.js --autotest",
+    "coverage": "istanbul cover --include-all-sources --filename game.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
