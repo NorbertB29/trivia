@@ -1,5 +1,7 @@
 require('./game.js');
 require('./gameLogger.js');
+require('./gameRunner.js');
+const fs = require('fs');
 
 // describe("The test environment", function() {
 //   it("should pass", function() {
@@ -13,7 +15,7 @@ require('./gameLogger.js');
 
 describe("Your specs...", function() {
   var logs = [];
-  var game;
+  var game, logger;
   
   console.log = function(message) {
     logs.push(message);
@@ -26,7 +28,8 @@ describe("Your specs...", function() {
 
   beforeEach(() => {
     logs = [];
-    game = new Game();
+    gameLogger = new GameLogger();
+    game = new Game(gameLogger);
   });
   
   it("should add user by name", function() {
@@ -53,6 +56,29 @@ describe("Your specs...", function() {
     game.add('User');
     game.roll(2);
     expect(logs[4]).toBe('User\'s new location is 2');
+  });
+
+  it('golden master test 1', function() {
+    game.add('Chet');
+    game.add('Pat');
+    game.add('Sue');
+    runner(game);
+
+    const result = fs.readFileSync('golden_master_0.txt', { encoding: 'utf8' });
+    const parsedData = String(result).split(',');
+
+    expect(gameLogger.logs).toEqual(parsedData);
+  });
+
+  it('golden master test 2', function() {
+    game.add('User1');
+    game.add('User2');
+    runner(game);
+
+    const result = fs.readFileSync('golden_master_1.txt', { encoding: 'utf8' });
+    const parsedData = String(result).split(',');
+
+    expect(gameLogger.logs).toEqual(parsedData);
   });
 
 });

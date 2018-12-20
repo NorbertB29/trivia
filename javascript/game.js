@@ -1,4 +1,6 @@
 require('./gameLogger.js');
+require('./gameRunner.js');
+
 
 exports = typeof window !== "undefined" && window !== null ? window : global;
 
@@ -176,21 +178,12 @@ exports.Game = function(logger) {
 
 var notAWinner = false;
 
-var logger = new GameLogger();
-var game = new Game(logger);
+// var logger = new GameLogger();
+// var game = new Game(logger);
 
-game.add('Chet');
-game.add('Pat');
-game.add('Sue');
+// game.add('User1');
+// game.add('User2');
 
-do{
+// runner(game);
+// logger.writeResult(1);
 
-  game.roll(Math.floor(Math.random()*6) + 1);
-
-  if(Math.floor(Math.random()*10) == 7){
-    notAWinner = game.wrongAnswer();
-  }else{
-    notAWinner = game.wasCorrectlyAnswered();
-  }
-
-}while(notAWinner);

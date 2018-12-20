@@ -6,8 +6,11 @@
   "scripts": {
     "test": "jasmine-node game.spec.js",
     "test-watch": "jasmine-node game.spec.js --autotest",
-    "coverage": "istanbul cover --include-all-sources --filename game.js"
+    "coverage": "nyc npm test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
 }
