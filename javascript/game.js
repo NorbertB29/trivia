@@ -7,6 +7,7 @@ exports = typeof window !== "undefined" && window !== null ? window : global;
 exports.Game = function(logger) {
   var log = logger ? logger.log : console.log;
 
+  var maxPlayer        = 6;
   var players          = new Array();
   var places           = new Array(6);
   var purses           = new Array(6);
@@ -62,10 +63,14 @@ exports.Game = function(logger) {
   };
 
   this.add = function(playerName){
+    var numberOfPlayers = this.howManyPlayers();
+    if (numberOfPlayers >= maxPlayer) throw new Error('Maximum player number reached');
+
+    places[numberOfPlayers] = 0;
+    purses[numberOfPlayers] = 0;
+    inPenaltyBox[numberOfPlayers] = false;
+
     players.push(playerName);
-    places[this.howManyPlayers() - 1] = 0;
-    purses[this.howManyPlayers() - 1] = 0;
-    inPenaltyBox[this.howManyPlayers() - 1] = false;
 
     log(playerName + " was added");
     log("They are player number " + players.length);
@@ -126,7 +131,7 @@ exports.Game = function(logger) {
   this.wasCorrectlyAnswered = function(){
     if(inPenaltyBox[currentPlayer]){
       if(isGettingOutOfPenaltyBox){
-        log('Answer was correct!!!!');
+        log('Answer was correct!');
         purses[currentPlayer] += 1;
         log(players[currentPlayer] + " now has " +
                     purses[currentPlayer]  + " Gold Coins.");
@@ -148,7 +153,7 @@ exports.Game = function(logger) {
 
     }else{
 
-      log("Answer was correct!!!!");
+      log("Answer was correct!");
 
       purses[currentPlayer] += 1;
       log(players[currentPlayer] + " now has " +
@@ -178,12 +183,12 @@ exports.Game = function(logger) {
 
 var notAWinner = false;
 
-// var logger = new GameLogger();
-// var game = new Game(logger);
+var logger = new GameLogger();
+var game = new Game(logger);
 
-// game.add('User1');
-// game.add('User2');
+game.add('User1');
+game.add('User2');
 
-// runner(game);
+runner(game);
 // logger.writeResult(1);
 

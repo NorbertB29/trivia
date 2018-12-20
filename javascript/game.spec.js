@@ -81,4 +81,25 @@ describe("Your specs...", function() {
     expect(gameLogger.logs).toEqual(parsedData);
   });
 
+  it('should throw an exception when player array overflows', function() {
+    try {
+      for (var i = 0; i < 8; i++) {
+        game.add('User' + i);
+      }
+    } catch (error) {
+      expect(error.message).toBe('Maximum player number reached');
+    }
+  });
+
+  it('should format answer validation message', function() {
+    var multipleBangMark = new RegExp(/!{2,}/g);
+    var multipleFound = false;
+
+    for (let i = 0; i < gameLogger.logs.length; i++) {
+      multipleFound = multipleBangMark.test(gameLogger.logs[i]);
+    }
+
+    expect(multipleFound).toBeFalsy();
+  });
+
 });

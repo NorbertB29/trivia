@@ -1,11 +1,16 @@
+require('./timer');
+
 exports = typeof window !== "undefined" && window !== null ? window : global;
 
 var state0 = 1; // SEED - change these to affect the apparent randomness of the outcome
 var state1 = 2; // SEED - change these to affect the apparent randomness of the outcome
 
 exports.runner = function(game) {
+    var timer = new Timer();
+
     state0 = 1;
     state1 = 2;
+
     do {
         game.roll(Math.floor(xorshift()*6) + 1);
         
